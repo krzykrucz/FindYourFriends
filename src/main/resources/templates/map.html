@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Find your Friends</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" href="css/map.css"/>
+
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/lodash"></script>
+        <script src="js/lib/vue-google-maps.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <gmap-map :center="center"
+                      :zoom="7">
+            </gmap-map>
+        </div>
+    </body>
+    <script>
+        Vue.use(VueGoogleMaps, {
+            load: {
+                key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
+//                v: 'OPTIONAL VERSION NUMBER',
+//                libraries: 'places', //// If you need to use place input
+            }
+        })
+
+        new Vue({
+            el: '#root',
+            data: function() {
+                return {
+                    center: {
+                        // Poland geolocation
+                        lat: 51.9194,
+                        lng: 19.1451
+                    }
+                }
+            },
+            ready: function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        this.center = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                    }, function() {/* on error */});
+                }
+            }
+        });
+    </script>
+
+</html>
