@@ -1,3 +1,7 @@
 language: java
 jdk:
  - oraclejdk8
+notifications:
+  slack:
+    rooms:
+      - trashtrack-team:NCXeVdvMhdjd7JeMxZmwO2Nv#dev_intel
