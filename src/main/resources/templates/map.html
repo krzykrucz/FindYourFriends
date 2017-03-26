@@ -9,11 +9,17 @@
         <script src="https://unpkg.com/vue"></script>
         <script src="https://unpkg.com/lodash"></script>
         <script src="js/lib/vue-google-maps.js"></script>
+        <script src="js/lib/vue-spinner.js"></script>
     </head>
 
     <body>
         <div id="root">
-            <gmap-map :center="center"
+            <ring-loader :loading="!mapReady">
+                <!--:color="black" not working-->
+                <!--:size="" not working -->
+            </ring-loader>
+            <gmap-map v-if="mapReady"
+                      :center="center"
                       :zoom="7">
                 <gmap-marker :position="markerPosition"
                              :clickable="true"
@@ -29,11 +35,11 @@
 //                v: 'OPTIONAL VERSION NUMBER',
 //                libraries: 'places', //// If you need to use place input
             }
-        })
-
+        });
+        Vue.component('ring-loader', VueSpinner.RingLoader);
         new Vue({
             el: '#root',
-            data: function () {
+            data() {
                 return {
                     center: {
                         // Poland geolocation
@@ -43,17 +49,21 @@
                     markerPosition: {
                         lat: 51.9194,
                         lng: 19.1451
-                    }
+                    },
+                    mapReady: false
                 }
             },
-            ready: function () {
+            mounted() {
+                const vue = this
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        this.center = {
+                        vue.center = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
                         };
+                        vue.mapReady = true
                     }, function () {/* on error */
+                        vue.mapReady = true
                     });
                 }
             }
