@@ -21,7 +21,7 @@
             <gmap-map v-if="mapReady"
                       :center="center"
                       :zoom="7">
-                <gmap-marker :position="markerPosition"
+                <gmap-marker v-for="marker in markerList" :position="marker.position"
                              :clickable="true"
                              :draggable="false">
                 </gmap-marker>
@@ -50,7 +50,8 @@
                         lat: 51.9194,
                         lng: 19.1451
                     },
-                    mapReady: false
+                    mapReady: false,
+                    markerList: [{position: {}}, {position: {}}]
                 }
             },
             mounted() {

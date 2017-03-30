@@ -1,8 +1,10 @@
 package pl.edu.agh.user;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by hector on 26/03/2017.
@@ -10,6 +12,8 @@ import org.springframework.data.annotation.Id;
 
 @NoArgsConstructor
 @ToString
+@Getter
+@Document
 public class User {
 
     @Id
