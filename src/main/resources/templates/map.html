@@ -10,11 +10,12 @@
         <script src="https://unpkg.com/lodash"></script>
         <script src="js/lib/vue-google-maps.js"></script>
         <script src="js/lib/vue-spinner.js"></script>
+        <script type="text/javascript" src="js/borders.js"></script>
     </head>
 
     <body>
         <div id="root">
-            <ring-loader :loading="!mapReady">
+            <ring-loader :loading="mapReady">
                 <!--:color="black" not working-->
                 <!--:size="" not working -->
             </ring-loader>
@@ -23,8 +24,11 @@
                       :zoom="7">
                 <gmap-marker :position="markerPosition"
                              :clickable="true"
-                             :draggable="false">
+                             :draggable="false"
+                             @click="center=markerPosition">
                 </gmap-marker>
+                <gmap-polygon :path="path">
+                </gmap-polygon>
             </gmap-map>
         </div>
     </body>
@@ -50,7 +54,8 @@
                         lat: 51.9194,
                         lng: 19.1451
                     },
-                    mapReady: false
+                    mapReady: false,
+                    path: [paris]
                 }
             },
             mounted() {
