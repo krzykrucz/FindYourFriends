@@ -30,8 +30,8 @@
                              :clickable="true"
                              :draggable="false"
                              @mouseover="markerHovered=true"
+                             @mouseout="markerHovered=false"
                              @click="center=markerPosition">
-                    <!--@mouseout="markerHovered=false"-->
                     <gmap-info-window :opened="markerHovered"
                                       :content="markerContent">
                     </gmap-info-window>
