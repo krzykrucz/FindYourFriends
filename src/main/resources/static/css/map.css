@@ -5,6 +5,7 @@
 
 body {
     background: #f5f5f5;
+    font-family: Arial, serif;
 }
 
 .v-spinner {
@@ -15,4 +16,14 @@ body {
     margin-left: -50px;
     width: 100px;
     height: 100px;
+}
+
+.spinner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -40px;
+    width: 100px;
+    height: 100px;
+    color: #acacac;
 }

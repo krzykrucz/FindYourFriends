@@ -15,17 +15,26 @@
 
     <body>
         <div id="root">
-            <ring-loader :loading="mapReady">
-                <!--:color="black" not working-->
-                <!--:size="" not working -->
-            </ring-loader>
-            <gmap-map v-if="mapReady"
+            <div v-if="!mapReady">
+                <clip-loader :loading="!mapReady"
+                             :color="loaderColor">
+                </clip-loader>
+                <div class="spinner-text">
+                    Please wait...
+                </div>
+            </div>
+            <gmap-map v-else
                       :center="center"
                       :zoom="7">
                 <gmap-marker :position="markerPosition"
                              :clickable="true"
                              :draggable="false"
+                             @mouseover="markerHovered=true"
                              @click="center=markerPosition">
+                    <!--@mouseout="markerHovered=false"-->
+                    <gmap-info-window :opened="markerHovered"
+                                      :content="markerContent">
+                    </gmap-info-window>
                 </gmap-marker>
                 <gmap-polygon :path="path">
                 </gmap-polygon>
@@ -36,11 +45,10 @@
         Vue.use(VueGoogleMaps, {
             load: {
                 key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
-//                v: 'OPTIONAL VERSION NUMBER',
 //                libraries: 'places', //// If you need to use place input
             }
         });
-        Vue.component('ring-loader', VueSpinner.RingLoader);
+        Vue.component('clip-loader', VueSpinner.ClipLoader);
         new Vue({
             el: '#root',
             data() {
@@ -55,7 +63,10 @@
                         lng: 19.1451
                     },
                     mapReady: false,
-                    path: [paris]
+                    path: [paris],
+                    loaderColor: '#acacac',
+                    markerHovered: false,
+                    markerContent: 'Some city'
                 }
             },
             mounted() {
