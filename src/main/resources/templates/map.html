@@ -10,7 +10,6 @@
         <script src="https://unpkg.com/lodash"></script>
         <script src="js/lib/vue-google-maps.js"></script>
         <script src="js/lib/vue-spinner.js"></script>
-        <script type="text/javascript" src="js/borders.js"></script>
     </head>
 
     <body>
@@ -26,18 +25,27 @@
             <gmap-map v-else
                       :center="center"
                       :zoom="7">
-                <gmap-marker :position="markerPosition"
+                <gmap-marker v-for="(city,id) in data"
+                             :key="id"
+                             :position="city.location"
                              :clickable="true"
                              :draggable="false"
-                             @mouseover="markerHovered=true"
-                             @mouseout="markerHovered=false"
-                             @click="center=markerPosition">
-                    <gmap-info-window :opened="markerHovered"
-                                      :content="markerContent">
+                             @click="onMarkerClick(id)">
+                    <gmap-info-window :opened="city.open"
+                                      @closeclick="closeCity(id)">
+                        <div class="friend-list">
+                            <div class="city-title">
+                                {{city.label}}
+                            </div>
+                            <div v-for="(friend,fid) in city.friends"
+                                 :key="fid"
+                                 @click="openInNewTab(friend.link)"
+                                 class="friend">
+                                {{friend.name}}
+                            </div>
+                        </div>
                     </gmap-info-window>
                 </gmap-marker>
-                <gmap-polygon :path="path">
-                </gmap-polygon>
             </gmap-map>
         </div>
     </body>
@@ -58,16 +66,54 @@
                         lat: 51.9194,
                         lng: 19.1451
                     },
-                    markerPosition: {
-                        lat: 51.9194,
-                        lng: 19.1451
-                    },
                     mapReady: false,
-                    path: [paris],
                     loaderColor: '#acacac',
                     markerHovered: false,
-                    markerContent: 'Some city'
+                    data: [ // mock data
+                        {
+                            label: 'Warsaw',
+                            location: {lat: 52.2297, lng: 21.0122},
+                            friends: [
+                                {
+                                    name: 'Peter',
+                                    link: 'http://www.google.com/1'
+                                },
+                                {
+                                    name: 'John',
+                                    link: 'http://www.google.com/2'
+                                }
+                            ]
+                        }, {
+                            label: 'Krakow',
+                            location: {lat: 50.0647, lng: 19.9450},
+                            friends: [
+                                {
+                                    name: 'Peter',
+                                    link: 'http://www.google.com/3'
+                                }
+                            ]
+                        }
+                    ]
                 }
+            },
+            methods: {
+                onMarkerClick(cityId) {
+                    this.center = this.data[cityId].location
+                    this.data = this.data.map(c => {
+                        c.open = false
+                        return c
+                    })
+                    this.data[cityId].open = true
+                },
+                openInNewTab(url) {
+                    const win = window.open(url, '_blank');
+                    win.focus();
+                },
+                closeCity(cityId) {
+                    const closedCity = this.data[cityId]
+                    closedCity.open = false
+                    Vue.set(this.data, cityId, closedCity)
+                },
             },
             mounted() {
                 const vue = this
@@ -82,6 +128,9 @@
                         vue.mapReady = true
                     });
                 }
+                this.data.forEach(c => {
+                    c.open = false
+                })
             }
         });
     </script>

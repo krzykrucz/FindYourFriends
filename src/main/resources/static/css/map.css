@@ -22,8 +22,32 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -40px;
+    margin-left: -45px;
     width: 100px;
     height: 100px;
     color: #acacac;
+}
+
+.friend-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend {
+    font-weight: 500;
+    margin: 5px;
+    cursor: alias;
+}
+
+.city-title {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.city-title:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid black;
 }
