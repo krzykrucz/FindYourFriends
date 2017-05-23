@@ -1,4 +1,4 @@
-package pl.edu.agh.friend;
+package pl.edu.agh.social;
 
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;

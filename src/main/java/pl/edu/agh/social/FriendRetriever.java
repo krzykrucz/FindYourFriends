@@ -1,6 +1,4 @@
-package pl.edu.agh.friend.retriever;
-
-import pl.edu.agh.friend.Friend;
+package pl.edu.agh.social;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package pl.edu.agh.friend;
+package pl.edu.agh.social;
 
 import lombok.Getter;
 import pl.edu.agh.map.City;

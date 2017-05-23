@@ -1,4 +1,4 @@
-package pl.edu.agh.friend.retriever;
+package pl.edu.agh.social.retriever;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.edu.agh.social.FriendRetriever;
+import pl.edu.agh.social.GeneralFriendRetriever;
 
 import java.lang.reflect.Field;
 import java.util.List;

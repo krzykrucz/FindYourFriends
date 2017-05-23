@@ -1,6 +1,4 @@
-package pl.edu.agh.friend.creator;
-
-import pl.edu.agh.friend.Friend;
+package pl.edu.agh.social;
 
 /**
  * Created by hector on 23/04/2017.

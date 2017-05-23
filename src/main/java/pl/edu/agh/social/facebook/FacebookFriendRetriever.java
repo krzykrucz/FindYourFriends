@@ -1,11 +1,11 @@
-package pl.edu.agh.friend.retriever;
+package pl.edu.agh.social.facebook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.friend.Friend;
-import pl.edu.agh.friend.creator.FacebookFriendCreator;
+import pl.edu.agh.social.Friend;
+import pl.edu.agh.social.FriendRetriever;
 
 import java.util.Collections;
 import java.util.List;

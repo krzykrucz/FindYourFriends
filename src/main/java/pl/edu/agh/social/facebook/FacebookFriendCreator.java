@@ -1,13 +1,14 @@
-package pl.edu.agh.friend.creator;
+package pl.edu.agh.social.facebook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.friend.Friend;
 import pl.edu.agh.map.City;
 import pl.edu.agh.map.GeoLocation;
 import pl.edu.agh.map.GeoLocationResolver;
+import pl.edu.agh.social.Friend;
+import pl.edu.agh.social.FriendCreator;
 
 import java.util.Optional;
 

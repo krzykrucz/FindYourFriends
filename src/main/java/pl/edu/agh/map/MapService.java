@@ -2,9 +2,9 @@ package pl.edu.agh.map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.agh.friend.Friend;
-import pl.edu.agh.friend.FriendDto;
-import pl.edu.agh.friend.retriever.GeneralFriendRetriever;
+import pl.edu.agh.social.Friend;
+import pl.edu.agh.social.FriendDto;
+import pl.edu.agh.social.GeneralFriendRetriever;
 
 import java.util.List;
 import java.util.stream.Collectors;

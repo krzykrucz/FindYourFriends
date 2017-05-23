@@ -1,8 +1,7 @@
-package pl.edu.agh.friend.retriever;
+package pl.edu.agh.social;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.agh.friend.Friend;
 
 import java.util.List;
 import java.util.stream.Collectors;

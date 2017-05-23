@@ -1,7 +1,7 @@
 package pl.edu.agh.map;
 
 import lombok.Getter;
-import pl.edu.agh.friend.FriendDto;
+import pl.edu.agh.social.FriendDto;
 
 import java.util.List;
 
