@@ -15,7 +15,7 @@
     <body>
         <div id="root">
             <div class="top-bar">
-                <form th:action="/connect/facebook" method="POST">
+                <form th:action="@{/connect/facebook}" method="POST">
                     <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
                     <p>
                         <button type="submit">Connect to Facebook</button>

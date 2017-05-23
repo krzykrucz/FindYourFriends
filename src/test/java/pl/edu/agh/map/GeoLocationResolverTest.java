@@ -1,5 +1,6 @@
 package pl.edu.agh.map;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -12,9 +13,9 @@ public class GeoLocationResolverTest {
 
     private GeoLocationResolver geoLocationResolver;
 
-//    @Test
-//    public void resolveLocation() throws Exception {
+    @Test
+    public void resolveLocation() throws Exception {
 //        geoLocationResolver.resolveLocation()
-//    }
+    }
 
 }

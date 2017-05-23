@@ -23,7 +23,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping("/map")
+    @GetMapping({"/", "/map"})
     public String map(Model model) {
         final List<CityDto> cityDtos = mapService.getCities();
         model.addAttribute("cities", cityDtos);
