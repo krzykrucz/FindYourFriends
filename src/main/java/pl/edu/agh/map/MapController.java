@@ -27,7 +27,7 @@ public class MapController {
     public String map(Model model) {
         final List<CityDto> cityDtos = mapService.getCities();
         model.addAttribute("cities", cityDtos);
-        log.info("GET /map", cityDtos);
+        log.info("GET /map: " + cityDtos);
         return "map";
     }
 

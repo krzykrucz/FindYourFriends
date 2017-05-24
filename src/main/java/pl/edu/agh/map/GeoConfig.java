@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class GeoConfig {
 
     @Bean
-    public GeoApiContext geoApiContext(@Value("google.maps.api.key") String googleApiKey) {
+    public GeoApiContext geoApiContext(@Value("${google.maps.api.key}") String googleApiKey) {
         return new GeoApiContext().setApiKey(googleApiKey);
     }
 }
