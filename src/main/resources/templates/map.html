@@ -1,146 +1,155 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Find your Friends</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Find your Friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-        <link rel="stylesheet" href="css/map.css"/>
+    <link rel="stylesheet" href="css/map.css"/>
 
-        <script src="https://unpkg.com/vue"></script>
-        <script src="https://unpkg.com/lodash"></script>
-        <script src="js/lib/vue-google-maps.js"></script>
-        <script src="js/lib/vue-spinner.js"></script>
-    </head>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/lodash"></script>
+    <script src="js/lib/vue-google-maps.js"></script>
+    <script src="js/lib/vue-spinner.js"></script>
+</head>
 
-    <body>
-        <div id="root">
-            <div class="top-bar">
-                <form th:action="@{/connect/facebook}" method="POST">
-                    <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
-                    <p>
-                        <button type="submit">Connect to Facebook</button>
-                    </p>
-                </form>
-            </div>
-            <div v-if="!mapReady">
-                <clip-loader :loading="!mapReady"
-                             :color="loaderColor">
-                </clip-loader>
-                <div class="spinner-text">
-                    Please wait...
-                </div>
-            </div>
-            <gmap-map v-else
-                      :center="center"
-                      :zoom="7">
-                <gmap-marker v-for="(city,id) in data"
-                             :key="id"
-                             :position="city.location"
-                             :clickable="true"
-                             :draggable="false"
-                             @click="onMarkerClick(id)">
-                    <gmap-info-window :opened="city.open"
-                                      @closeclick="closeCity(id)">
-                        <div class="friend-list">
-                            <div class="city-title">
-                                {{city.label}}
-                            </div>
-                            <div v-for="(friend,fid) in city.friends"
-                                 :key="fid"
-                                 @click="openInNewTab(friend.link)"
-                                 class="friend">
-                                {{friend.name}}
-                            </div>
-                        </div>
-                    </gmap-info-window>
-                </gmap-marker>
-            </gmap-map>
+<body>
+<div id="root">
+    <div class="top-bar">
+        <form th:action="@{/connect/facebook}" method="POST">
+            <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
+            <p>
+                <button type="submit">Connect to Facebook</button>
+            </p>
+        </form>
+        <p>
+            <span th:text="${facebookDataFirstName != null && facebookDataFirstName!= ''} ?
+                    ${'Zostałeś zalogowany jako: '}">
+            </span>
+            <span style="font-weight: bold"
+                  th:text="${facebookDataFirstName != null && facebookDataFirstName!= ''} ?
+                           ${facebookDataFirstName + ' ' + facebookDataLastName}">
+            </span>
+        </p>
+    </div>
+    <div v-if="!mapReady">
+        <clip-loader :loading="!mapReady"
+                     :color="loaderColor">
+        </clip-loader>
+        <div class="spinner-text">
+            Please wait...
         </div>
-    </body>
-    <script>
-        Vue.use(VueGoogleMaps, {
-            load: {
-                key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
+    </div>
+    <gmap-map v-else
+              :center="center"
+              :zoom="7">
+        <gmap-marker v-for="(city,id) in data"
+                     :key="id"
+                     :position="city.location"
+                     :clickable="true"
+                     :draggable="false"
+                     @click="onMarkerClick(id)">
+            <gmap-info-window :opened="city.open"
+                              @closeclick="closeCity(id)">
+                <div class="friend-list">
+                    <div class="city-title">
+                        {{city.label}}
+                    </div>
+                    <div v-for="(friend,fid) in city.friends"
+                         :key="fid"
+                         @click="openInNewTab(friend.link)"
+                         class="friend">
+                        {{friend.name}}
+                    </div>
+                </div>
+            </gmap-info-window>
+        </gmap-marker>
+    </gmap-map>
+</div>
+</body>
+<script>
+    Vue.use(VueGoogleMaps, {
+        load: {
+            key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
 //                libraries: 'places', //// If you need to use place input
+        }
+    });
+    Vue.component('clip-loader', VueSpinner.ClipLoader);
+    new Vue({
+        el: '#root',
+        data() {
+            return {
+                center: {
+                    // Poland geolocation
+                    lat: 51.9194,
+                    lng: 19.1451
+                },
+                mapReady: false,
+                loaderColor: '#acacac',
+                markerHovered: false,
+                data: [ // mock data
+                    {
+                        label: 'Warsaw',
+                        location: {lat: 52.2297, lng: 21.0122},
+                        friends: [
+                            {
+                                name: 'Peter',
+                                link: 'http://www.google.com/1'
+                            },
+                            {
+                                name: 'John',
+                                link: 'http://www.google.com/2'
+                            }
+                        ]
+                    }, {
+                        label: 'Krakow',
+                        location: {lat: 50.0647, lng: 19.9450},
+                        friends: [
+                            {
+                                name: 'Peter',
+                                link: 'http://www.google.com/3'
+                            }
+                        ]
+                    }
+                ]
             }
-        });
-        Vue.component('clip-loader', VueSpinner.ClipLoader);
-        new Vue({
-            el: '#root',
-            data() {
-                return {
-                    center: {
-                        // Poland geolocation
-                        lat: 51.9194,
-                        lng: 19.1451
-                    },
-                    mapReady: false,
-                    loaderColor: '#acacac',
-                    markerHovered: false,
-                    data: [ // mock data
-                        {
-                            label: 'Warsaw',
-                            location: {lat: 52.2297, lng: 21.0122},
-                            friends: [
-                                {
-                                    name: 'Peter',
-                                    link: 'http://www.google.com/1'
-                                },
-                                {
-                                    name: 'John',
-                                    link: 'http://www.google.com/2'
-                                }
-                            ]
-                        }, {
-                            label: 'Krakow',
-                            location: {lat: 50.0647, lng: 19.9450},
-                            friends: [
-                                {
-                                    name: 'Peter',
-                                    link: 'http://www.google.com/3'
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            methods: {
-                onMarkerClick(cityId) {
-                    this.center = this.data[cityId].location
-                    this.data = this.data.map(c => {
-                        c.open = false
-                        return c
-                    })
-                    this.data[cityId].open = true
-                },
-                openInNewTab(url) {
-                    const win = window.open(url, '_blank');
-                    win.focus();
-                },
-                closeCity(cityId) {
-                    const closedCity = this.data[cityId]
-                    closedCity.open = false
-                    Vue.set(this.data, cityId, closedCity)
-                },
-            },
-            mounted() {
-                const vue = this
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        vue.center = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-                        vue.mapReady = true
-                    }, function () {/* on error */
-                        vue.mapReady = true
-                    });
-                }
-                this.data.forEach(c => {
+        },
+        methods: {
+            onMarkerClick(cityId) {
+                this.center = this.data[cityId].location
+                this.data = this.data.map(c => {
                     c.open = false
+                    return c
                 })
+                this.data[cityId].open = true
+            },
+            openInNewTab(url) {
+                const win = window.open(url, '_blank');
+                win.focus();
+            },
+            closeCity(cityId) {
+                const closedCity = this.data[cityId]
+                closedCity.open = false
+                Vue.set(this.data, cityId, closedCity)
+            },
+        },
+        mounted() {
+            const vue = this
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    vue.center = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    vue.mapReady = true
+                }, function () {/* on error */
+                    vue.mapReady = true
+                });
             }
-        });
-    </script>
+            this.data.forEach(c => {
+                c.open = false
+            })
+        }
+    });
+</script>
 
 </html>
