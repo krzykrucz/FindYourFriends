@@ -15,22 +15,71 @@
 <body>
 <div id="root">
     <div class="top-bar">
-        <form th:action="@{/connect/facebook}" method="POST">
-            <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
-            <p>
-                <button type="submit">Connect to Facebook</button>
-            </p>
-        </form>
-        <p>
-            <span th:text="${facebookDataFirstName != null && facebookDataFirstName!= ''} ?
-                    ${'Zostałeś zalogowany jako: '}">
-            </span>
-            <span style="font-weight: bold"
-                  th:text="${facebookDataFirstName != null && facebookDataFirstName!= ''} ?
-                           ${facebookDataFirstName + ' ' + facebookDataLastName}">
-            </span>
-        </p>
+        <div class="login-bar">
+            <div style="flex-grow: 1; text-align: left">
+                <form th:action="@{/connect/facebook}" method="POST"
+                      th:if="${facebookDataFirstName == null || facebookDataFirstName == ''}">
+                    <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
+                    <button type="submit">Connect to Facebook</button>
+                </form>
+            </div>
+            <div style="flex-grow: 1; text-align: center">
+                <span th:text="${facebookDataFirstName != null && facebookDataFirstName != ''} ?
+                        ${'Zostałeś zalogowany jako: '}">
+                </span>
+                <span style="font-weight: bold"
+                      th:text="${facebookDataFirstName != null && facebookDataFirstName != ''} ?
+                               ${facebookDataFirstName + ' ' + facebookDataLastName}">
+                </span>
+            </div>
+            <div style="flex-grow: 1; text-align: right">
+            </div>
+        </div>
+
+        <div class="login-bar">
+            <div style="flex-grow: 1; text-align: left">
+                <form th:action="@{/connect/linkedin}" method="POST"
+                      th:if="${linkedinDataFirstName == null || linkedinDataFirstName == ''}">
+                    <input type="hidden"/>
+                    <button type="submit">Connect to LinkedIn</button>
+                </form>
+            </div>
+            <div style="flex-grow: 1; text-align: center">
+                <span th:text="${linkedinDataFirstName != null && linkedinDataFirstName != ''} ?
+                        ${'Zostałeś zalogowany jako: '}">
+                </span>
+                <span style="font-weight: bold"
+                      th:text="${linkedinDataFirstName != null && linkedinDataFirstName != ''} ?
+                               ${linkedinDataFirstName + ' ' + linkedinDataLastName}">
+                </span>
+            </div>
+            <div style="flex-grow: 1; text-align: right">
+            </div>
+        </div>
+
+        <div class="login-bar">
+            <div style="flex-grow: 1; text-align: left">
+                <form th:action="@{/connect/twitter}" method="POST"
+                      th:if="${twitterDataFirstName == null || twitterDataFirstName == ''}">
+                    <input type="hidden"/>
+                    <button type="submit">Connect to Twitter</button>
+                </form>
+            </div>
+            <div style="flex-grow: 1; text-align: center">
+                <span th:text="${twitterDataFirstName != null && twitterDataFirstName != ''} ?
+                        ${'Zostałeś zalogowany jako: '}">
+                </span>
+                <span style="font-weight: bold"
+                      th:text="${twitterDataFirstName != null && twitterDataFirstName != ''} ?
+                               ${twitterDataFirstName + ' ' + twitterDataLastName}">
+                </span>
+            </div>
+            <div style="flex-grow: 1; text-align: right">
+            </div>
+        </div>
+
     </div>
+
     <div v-if="!mapReady">
         <clip-loader :loading="!mapReady"
                      :color="loaderColor">
