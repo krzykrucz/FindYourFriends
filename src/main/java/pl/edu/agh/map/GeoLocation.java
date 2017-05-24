@@ -11,12 +11,12 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class GeoLocation {
 
-    private final double latitude;
+    private final double lat;
 
-    private final double longitude;
+    private final double lng;
 
     public GeoLocation(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.lat = latitude;
+        this.lng = longitude;
     }
 }
