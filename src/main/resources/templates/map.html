@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Find your Friends</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -14,6 +14,14 @@
 
     <body>
         <div id="root">
+            <div class="top-bar">
+                <form th:action="@{/connect/twitter}" method="POST">
+                    <input type="hidden"/>
+                    <p>
+                        <button type="submit">Connect to Twitter</button>
+                    </p>
+                </form>
+            </div>
             <div v-if="!mapReady">
                 <clip-loader :loading="!mapReady"
                              :color="loaderColor">
