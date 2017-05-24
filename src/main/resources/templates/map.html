@@ -21,6 +21,18 @@
                         <button type="submit">Connect to Facebook</button>
                     </p>
                 </form>
+                <form th:action="@{/connect/linkedin}" method="POST">
+                    <input type="hidden"/>
+                    <p>
+                        <button type="submit">Connect to LinkedIn</button>
+                    </p>
+                </form>
+                <form th:action="@{/connect/twitter}" method="POST">
+                    <input type="hidden"/>
+                    <p>
+                        <button type="submit">Connect to Twitter</button>
+                    </p>
+                </form>
             </div>
             <div v-if="!mapReady">
                 <clip-loader :loading="!mapReady"
