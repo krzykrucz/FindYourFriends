@@ -10,7 +10,7 @@ import pl.edu.agh.social.facebook.FacebookFriendRetriever;
 @Service
 public class SocialService {
 
-    private FacebookFriendRetriever facebookFriendRetriever;
+    private final FacebookFriendRetriever facebookFriendRetriever;
 
     @Autowired
     public SocialService(FacebookFriendRetriever facebookFriendRetriever) {

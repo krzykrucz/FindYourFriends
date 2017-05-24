@@ -34,11 +34,13 @@ public class MapController {
         log.info("GET /map", cityDtos);
 
         FacebookDto facebookDto = socialService.getFacebookBasicData();
-        System.err.println("GET /facebookDto: " + facebookDto.getFirstName() + ", " + facebookDto.getLastName());
+        if (facebookDto != null) {
+            System.err.println("GET /facebookDto: " + facebookDto.getFirstName() + ", " + facebookDto.getLastName());
 
-        model.addAttribute("facebookDataFirstName", facebookDto.getFirstName());
-        model.addAttribute("facebookDataLastName", facebookDto.getLastName());
-        log.info("GET /facebookData", facebookDto);
+            model.addAttribute("facebookDataFirstName", facebookDto.getFirstName());
+            model.addAttribute("facebookDataLastName", facebookDto.getLastName());
+            log.info("GET /facebookData", facebookDto);
+        }
 
         return "map";
     }
