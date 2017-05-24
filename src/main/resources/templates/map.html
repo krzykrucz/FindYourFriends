@@ -15,6 +15,7 @@
     <body>
         <div id="root">
             <div class="top-bar">
+                <h1>Find Your Friends</h1>
                 <form th:action="@{/connect/twitter}" method="POST">
                     <input type="hidden"/>
                     <p>
@@ -35,7 +36,7 @@
                       :zoom="7">
                 <gmap-marker v-for="(city,id) in data"
                              :key="id"
-                             :position="city.location"
+                             :position="city.geoLocation"
                              :clickable="true"
                              :draggable="false"
                              @click="onMarkerClick(id)">
@@ -43,11 +44,11 @@
                                       @closeclick="closeCity(id)">
                         <div class="friend-list">
                             <div class="city-title">
-                                {{city.label}}
+                                {{city.name}}
                             </div>
                             <div v-for="(friend,fid) in city.friends"
                                  :key="fid"
-                                 @click="openInNewTab(friend.link)"
+                                 @click="openInNewTab(friend.accountLink)"
                                  class="friend">
                                 {{friend.name}}
                             </div>
@@ -57,7 +58,8 @@
             </gmap-map>
         </div>
     </body>
-    <script>
+    <script th:inline="javascript">
+        const cities = [[${cities}]]
         Vue.use(VueGoogleMaps, {
             load: {
                 key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
@@ -77,36 +79,12 @@
                     mapReady: false,
                     loaderColor: '#acacac',
                     markerHovered: false,
-                    data: [ // mock data
-                        {
-                            label: 'Warsaw',
-                            location: {lat: 52.2297, lng: 21.0122},
-                            friends: [
-                                {
-                                    name: 'Peter',
-                                    link: 'http://www.google.com/1'
-                                },
-                                {
-                                    name: 'John',
-                                    link: 'http://www.google.com/2'
-                                }
-                            ]
-                        }, {
-                            label: 'Krakow',
-                            location: {lat: 50.0647, lng: 19.9450},
-                            friends: [
-                                {
-                                    name: 'Peter',
-                                    link: 'http://www.google.com/3'
-                                }
-                            ]
-                        }
-                    ]
+                    data: cities
                 }
             },
             methods: {
                 onMarkerClick(cityId) {
-                    this.center = this.data[cityId].location
+                    this.center = this.data[cityId].geoLocation
                     this.data = this.data.map(c => {
                         c.open = false
                         return c
