@@ -23,6 +23,7 @@ public class GeoLocationResolver {
     @Autowired
     public GeoLocationResolver(GeoApiContext geoApiContext) {
         this.geoApiContext = geoApiContext;
+        geoApiContext.setApiKey("AIzaSyBxeFsHOkk2AEhkB2soI2rXD_qUMfzNCXg");
     }
 
     public Optional<GeoLocation> resolveLocation(String placeName) {

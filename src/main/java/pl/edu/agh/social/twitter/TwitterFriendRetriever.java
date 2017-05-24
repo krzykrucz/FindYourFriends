@@ -39,7 +39,7 @@ public class TwitterFriendRetriever implements FriendRetriever {
         for (TwitterProfile e : twitter.friendOperations().getFriends()) {
             log.info(e.getName() + " " + e.getScreenName() + " " + e.getLocation());
         }
-        return this.twitter.friendOperations().getFollowers() //have to be getFriends()
+        return this.twitter.friendOperations().getFriends()
                 .stream()
                 .map(twitterFriendCreator::create)
                 .collect(Collectors.toList());

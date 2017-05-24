@@ -3,7 +3,6 @@ package pl.edu.agh.social.facebook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.facebook.api.User;
-import org.springframework.stereotype.Component;
 import pl.edu.agh.map.City;
 import pl.edu.agh.map.GeoLocation;
 import pl.edu.agh.map.GeoLocationResolver;
@@ -16,7 +15,7 @@ import java.util.Optional;
  * Created by hector on 23/04/2017.
  */
 
-@Component
+//@Component
 public class FacebookFriendCreator implements FriendCreator<User> {
 
     private final GeoLocationResolver geoLocationResolver;

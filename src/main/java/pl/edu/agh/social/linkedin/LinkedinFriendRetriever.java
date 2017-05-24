@@ -5,14 +5,13 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.linkedin.api.LinkedInProfileFull;
-import org.springframework.stereotype.Component;
 import pl.edu.agh.social.Friend;
 import pl.edu.agh.social.FriendRetriever;
 
 import java.util.Collections;
 import java.util.List;
 
-@Component
+//@Component
 public class LinkedinFriendRetriever implements FriendRetriever {
 
     private final LinkedIn linkedIn;

@@ -15,18 +15,18 @@
     <body>
         <div id="root">
             <div class="top-bar">
-                <form th:action="@{/connect/facebook}" method="POST">
-                    <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
-                    <p>
-                        <button type="submit">Connect to Facebook</button>
-                    </p>
-                </form>
-                <form th:action="@{/connect/linkedin}" method="POST">
-                    <input type="hidden"/>
-                    <p>
-                        <button type="submit">Connect to LinkedIn</button>
-                    </p>
-                </form>
+                <!-- <form th:action="@{/connect/facebook}" method="POST">
+                        <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
+                        <p>
+                            <button type="submit">Connect to Facebook</button>
+                        </p>
+                    </form>
+                    <form th:action="@{/connect/linkedin}" method="POST">
+                        <input type="hidden"/>
+                        <p>
+                            <button type="submit">Connect to LinkedIn</button>
+                        </p>
+                    </form> -->
                 <form th:action="@{/connect/twitter}" method="POST">
                     <input type="hidden"/>
                     <p>
@@ -73,7 +73,7 @@
         Vue.use(VueGoogleMaps, {
             load: {
                 key: 'AIzaSyB61sCvOkrvTlAioaf43fFB1MI7rQxntYM',
-//                libraries: 'places', //// If you need to use place input
+                //                libraries: 'places', //// If you need to use place input
             }
         });
         Vue.component('clip-loader', VueSpinner.ClipLoader);

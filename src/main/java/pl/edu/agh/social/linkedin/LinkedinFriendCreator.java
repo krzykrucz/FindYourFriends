@@ -3,7 +3,6 @@ package pl.edu.agh.social.linkedin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.linkedin.api.LinkedInProfileFull;
 import org.springframework.social.linkedin.api.Location;
-import org.springframework.stereotype.Component;
 import pl.edu.agh.map.City;
 import pl.edu.agh.map.GeoLocation;
 import pl.edu.agh.map.GeoLocationResolver;
@@ -12,7 +11,7 @@ import pl.edu.agh.social.FriendCreator;
 
 import java.util.Optional;
 
-@Component
+//@Component
 public class LinkedinFriendCreator implements FriendCreator<LinkedInProfileFull> {
 
     private final GeoLocationResolver geoLocationResolver;
