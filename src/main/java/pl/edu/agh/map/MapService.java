@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.agh.social.Friend;
 import pl.edu.agh.social.FriendDto;
 import pl.edu.agh.social.GeneralFriendRetriever;
+import pl.edu.agh.social.twitter.TwitterDto;
+import pl.edu.agh.social.twitter.TwitterFriendRetriever;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +18,12 @@ import java.util.stream.Collectors;
 public class MapService {
 
     private final GeneralFriendRetriever generalFriendRetriever;
+    private final TwitterFriendRetriever twitterFriendRetriever;
 
     @Autowired
-    public MapService(GeneralFriendRetriever generalFriendRetriever) {
+    public MapService(GeneralFriendRetriever generalFriendRetriever, TwitterFriendRetriever twitterFriendRetriever) {
         this.generalFriendRetriever = generalFriendRetriever;
+        this.twitterFriendRetriever = twitterFriendRetriever;
     }
 
     public List<CityDto> getCities() {
@@ -38,4 +42,9 @@ public class MapService {
                 .collect(Collectors.toList());
         return new CityDto(city.getCityName(), city.getLocation(), friendDtos);
     }
+
+    public TwitterDto getTwitterBasicData() {
+        return twitterFriendRetriever.getBasicData();
+    }
+
 }

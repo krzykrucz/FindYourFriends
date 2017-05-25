@@ -42,6 +42,15 @@ public class TwitterFriendRetriever implements FriendRetriever {
                 .collect(Collectors.toList());
     }
 
+    public TwitterDto getBasicData() {
+        if (connectionRepository.findPrimaryConnection(Twitter.class) == null)
+            return new TwitterDto("");
+
+        return new TwitterDto(
+                twitter.userOperations().getUserProfile().getName()
+        );
+    }
+
 
 //    private void searcher() {
 //        SearchResults results = twitter.searchOperations().search(

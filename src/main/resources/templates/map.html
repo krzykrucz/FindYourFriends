@@ -16,12 +16,18 @@
         <div id="root">
             <div class="top-bar">
                 <h1>Find Your Friends</h1>
-                <form th:action="@{/connect/twitter}" method="POST">
-                    <input type="hidden"/>
-                    <p>
-                        <button type="submit">Connect to Twitter</button>
-                    </p>
-                </form>
+                <div>
+                    <form th:if="${twitterName == null || twitterName == ''}"
+                          th:action="@{/connect/twitter}" method="POST">
+                        <input type="hidden"/>
+                        <p>
+                            <button type="submit">Connect to Twitter</button>
+                        </p>
+                    </form>
+                    <h3 th:if="${twitterName != null && twitterName != ''}"
+                        th:text="'Zalogowano jako: ' + ${twitterName}">
+                    </h3>
+                </div>
             </div>
             <div v-if="!mapReady">
                 <clip-loader :loading="!mapReady"

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.edu.agh.social.twitter.TwitterDto;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class MapController {
         final List<CityDto> cityDtos = mapService.getCities();
         model.addAttribute("cities", cityDtos);
         log.info("GET /map: " + cityDtos);
+
+        final TwitterDto twitterDto = mapService.getTwitterBasicData();
+        model.addAttribute("twitterName", twitterDto.getName());
+        log.info("GET /map >> twitterName");
+
         return "map";
     }
 
