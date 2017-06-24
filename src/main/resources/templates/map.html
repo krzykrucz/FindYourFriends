@@ -22,6 +22,12 @@
                         <button type="submit">Connect to Twitter</button>
                     </p>
                 </form>
+                <form th:action="@{/connect/facebook}" method="POST">
+                    <input type="hidden" name="scope" value="public_profile,email,user_friends,user_posts"/>
+                    <p>
+                        <button type="submit">Connect to Facebook</button>
+                    </p>
+                </form>
             </div>
             <div v-if="!mapReady">
                 <clip-loader :loading="!mapReady"
