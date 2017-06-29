@@ -1,2 +1,6 @@
+JavaScript: true
+
 exclude_paths:
-- "static/js/lib/vue-spinner.js"
+- "src/main/resources/"
+- "mvnw"
+- "mvnw.cmd"
