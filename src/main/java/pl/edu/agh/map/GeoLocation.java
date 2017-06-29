@@ -2,6 +2,7 @@ package pl.edu.agh.map;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * Created by hector on 23/04/2017.
@@ -9,6 +10,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
+@ToString
 public class GeoLocation {
 
     private final double lat;

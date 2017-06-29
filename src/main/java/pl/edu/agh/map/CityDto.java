@@ -1,6 +1,7 @@
 package pl.edu.agh.map;
 
 import lombok.Getter;
+import lombok.ToString;
 import pl.edu.agh.social.FriendDto;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 
 @Getter
+@ToString
 public class CityDto {
 
     private final String name;
