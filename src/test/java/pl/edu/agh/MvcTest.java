@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import pl.edu.agh.map.MapController;
 import pl.edu.agh.map.MapService;
+import pl.edu.agh.social.GeneralPostRetriever;
 
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,6 +30,9 @@ public class MvcTest {
 
     @MockBean
     private MapService mapService;
+
+    @MockBean
+    private GeneralPostRetriever generalPostRetriever;
 
     @Test
     public void mapEndpointResponds() throws Exception {

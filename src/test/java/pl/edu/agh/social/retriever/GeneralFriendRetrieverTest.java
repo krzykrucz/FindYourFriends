@@ -30,7 +30,7 @@ public class GeneralFriendRetrieverTest {
     public void shouldAutowireRetrievers() throws Exception {
         final Field retrieversField = generalFriendRetriever.getClass().getDeclaredField("friendRetrievers");
         retrieversField.setAccessible(true);
-        assertThat((List<FriendRetriever>) retrieversField.get(generalFriendRetriever), hasSize(equalTo(1)));
+        assertThat((List<FriendRetriever>) retrieversField.get(generalFriendRetriever), hasSize(equalTo(2)));
     }
 
 
