@@ -1,2 +1,2 @@
 exclude_paths:
-- "src/main/resources/static/js/lib/"
+- "src/main/resources/"
