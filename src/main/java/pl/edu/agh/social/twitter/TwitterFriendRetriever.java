@@ -4,11 +4,14 @@ package pl.edu.agh.social.twitter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.social.Friend;
 import pl.edu.agh.social.FriendRetriever;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,8 +38,13 @@ public class TwitterFriendRetriever implements FriendRetriever {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
             return Collections.emptyList();
         }
-
-        return this.twitter.friendOperations().getFriends()
+        CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
+        ArrayList<TwitterProfile> allFriends = friends;
+        while (friends.hasNext()) {
+            friends = twitter.friendOperations().getFriendsInCursor(friends.getNextCursor());
+            allFriends.addAll(friends);
+        }
+        return allFriends
                 .stream()
                 .map(twitterFriendCreator::create)
                 .collect(Collectors.toList());
