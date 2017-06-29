@@ -1,6 +1,2 @@
-JavaScript: true
-
 exclude_paths:
 - "src/main/resources/"
-- "mvnw"
-- "mvnw.cmd"
