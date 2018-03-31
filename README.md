@@ -6,9 +6,7 @@
 
 [![codecov.io](http://codecov.io/github/krzykrucz/FindYourFriends/coverage.svg?branch=master)](http://codecov.io/github/krzykrucz/FindYourFriends?branch=master)
 
-Run application with _Intellij_
-
-To refresh running app when code was edited, press `Ctrl+Shift+F9` in a changed file
+Tech stack: Spring boot + Spring social + Vue.js 2.0
 
 To check style of application:
  - run `mvn checkstyle:checkstyle` 
